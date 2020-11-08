@@ -45,9 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Third-party
-    'registration',
     'debug_toolbar',
     'django_extensions',
+    'registration',
 
     # Project-specific
     'core',
