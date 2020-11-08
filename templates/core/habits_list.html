@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<h3> All Habits </h3>
+
+<div class="questions-container">
+    
+    {% for question in questions %}
+        <div class='question-container'>
+            <h4>{{ habit.action }} - added by: {{ habit.user }}</h4>
+            <p class='question-body'>{{ habit.target habit.measure }}</p>
+            <p>
+                <a href="{% url 'habits_detail' pk=habit.pk %}">More information</a>      
+            </p>
+        </div>
+
+    {% endfor %}
+
+</div>
+{% endblock %}
