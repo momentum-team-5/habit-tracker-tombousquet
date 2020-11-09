@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load static %}
+
 
 
 {% block content %}
@@ -22,14 +24,28 @@
             <a href="{% url 'records_create' habit_pk=habit.pk %}"> Add a daily record </a>
         </p>
     {% endif %}
-
+    <h3>Daily Records</h3>
         {% for record in habit.records.all %}
+            {% if record.actual >= habit.target %}
             <hr>
-            <div class=''>
-                <p class=''> Habit tracked on {{ record.date }}: <pre>{{ record.actual }} {{ habit.measure }} </pre>
-                <a href="{% url 'records_update' record_pk=record.pk %}">Edit record </a>  
-                <a href="{% url 'records_delete' record_pk=record.pk %}"> Delete record </a> 
-            </div>
+            
+                <p class='green'> {{ record.date }}:
+                {{ record.actual }} {{ habit.measure }} </p>
+                <a href="{% url 'records_update' record_pk=record.pk %}">Edit record</a>  
+                <a href="{% url 'records_delete' record_pk=record.pk %}">  Delete record </a> 
+            <hr>
+            {% endif %}
+
+            {% if record.actual < habit.target %}
+            <hr>
+            
+                <p class='red'> {{ record.date }}:
+                {{ record.actual }} {{ habit.measure }} </p>
+                <a href="{% url 'records_update' record_pk=record.pk %}">Edit record</a>  
+                <a href="{% url 'records_delete' record_pk=record.pk %}">  Delete record </a> 
+            <hr>
+            {% endif %}
+
         {% endfor %}
           
 
