@@ -10,8 +10,8 @@ class Habit(models.Model):
     target = models.IntegerField()
     measure = models.CharField(max_length=255)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='habits')
-    created_at = models.DateField()
-    updated_at = models.DateField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 class Record(models.Model):
     actual = models.IntegerField()

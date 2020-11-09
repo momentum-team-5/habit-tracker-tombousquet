@@ -21,12 +21,13 @@ from core import views as core_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
-    path('', core_views.habits_list, name="habits_list"),
+    path('', core_views.homepage, name="homepage"),
+    path('habits/', core_views.habits_list, name="habits_list"),
     path('habits/<int:pk>/', core_views.habits_detail, name="habits_detail"),
     path('habits/create/', core_views.habits_create, name="habits_create"),
     path('habits/<int:pk>/update', core_views.habits_update, name="habits_update"),
     path('habits/<int:pk>/delete', core_views.habits_delete, name="habits_delete"),
-    path('records/create/', core_views.records_create, name="records_create"),
+    path('records/<int:habit_pk>/create/', core_views.records_create, name="records_create"),
     path('records/<int:record_pk>/update', core_views.records_update, name="records_update"),
     path('records/<int:record_pk>/delete', core_views.records_delete, name="records_delete"),
 ]

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<h3>{{ habit.action }}</h3>
+
+<div class="">
+
+    <div class=''>
+        <p class=''>Added by {{ habit.user }}</p>
+        <p class=''>{{ habit.target }} {{ habit.measure }} </p>
+    </div>
+
+    {% if request.user.is_authenticated and request.user == habit.user %}
+        <p>
+            <a href="{% url 'habits_delete' pk=habit.pk %}" style="color:red;">Remove your habit</a>
+        </p>
+        <p>
+            <a href="{% url 'habits_update' pk=habit.pk %}"> Update your habit </a> 
+        </p>
+        <p>
+            <a href="{% url 'records_create' habit_pk=habit.pk %}"> Add a daily record </a>
+        </p>
+    {% endif %}
+
+        {% for record in habit.records.all %}
+            <hr>
+            <div class=''>
+                <p class=''> Habit tracked on {{ record.date }}: <pre>{{ record.actual }} {{ habit.measure }} </pre>
+                <a href="{% url 'records_update' record_pk=record.pk %}">Edit record </a>  
+                <a href="{% url 'records_delete' record_pk=record.pk %}"> Delete record </a> 
+            </div>
+        {% endfor %}
+          
+
+    </div>
+
+</div>
+{% endblock %}
