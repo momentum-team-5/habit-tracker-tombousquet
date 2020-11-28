@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<h3> All Habits </h3>
+
+<div class="">
+    {% if request.user.is_authenticated %}
+    {% for habit in habits %}
+        <div class=''>
+            <h4>{{ habit.action }} - added by: {{ habit.user }}</h4>
+            <p class=''>{{ habit.target }} {{ habit.measure }}</p>
+            <p>
+                <a href="{% url 'habits_detail' pk=habit.pk %}">More information</a>      
+            </p>
+        </div>
+
+    {% endfor %}
+    {% endif %}
+
+</div>
+{% endblock %}
